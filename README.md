@@ -13,7 +13,7 @@ composer require stuartcusackie/statamic-responsive-requester
 
 ## Requirements
 
-This package utilises a Redis queue called **responsive**. You must have Redis installed on your server and you must enable a worker to process the queued jobs.
+This package utilises a Redis queue called **responsive**. You must have Redis installed on your server.
 
 
 ## Usage
