@@ -1,0 +1,32 @@
+{
+    "name": "stuartcusackie/statamic-responsive-requester",
+    "license": "MIT",
+    "description": "Access Statamic variables from any blade view or component.",
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": "^8.0 || ^9.0",
+        "statamic/cms": "~3.3.12",
+        "simplehtmldom/simplehtmldom": "^2.0@RC"
+    },
+    "autoload": {
+        "psr-4": {
+            "stuartcusackie\\StatamicResponsiveRequester\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Stuart Cusack",
+            "email": "stuart@stuartcusack.ie",
+            "homepage": "https://stuartcusack.ie",
+            "role": "President"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "stuartcusackie\\StatamicResponsiveRequester\\StatamicResponsiveRequesterServiceProvider"
+            ]
+        }
+    }
+}
