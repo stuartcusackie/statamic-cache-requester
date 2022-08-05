@@ -75,7 +75,7 @@ class RequestResponsiveImages extends Command
             }
         }
 
-        $this->info($images . ' glide images queued for retrieval. You can now run the responsive queue on redis.');
+        $this->info($this->images . ' glide images queued for retrieval. You can now run the responsive queue on redis.');
 
         return 0;
     }
