@@ -8,7 +8,7 @@ The purpose of this package is to pre-generate all website images, and alleviate
 ## Installation
 
 ```
-composer require stuartcusackie/statamic-glide-requester
+composer require stuartcusackie/statamic-glide-request
 ```
 
 ## Requirements
