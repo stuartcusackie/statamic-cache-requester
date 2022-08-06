@@ -1,11 +1,11 @@
 <?php
 
-namespace stuartcusackie\StatamicResponsiveRequester;
+namespace stuartcusackie\StatamicGlideRequester;
 
 use Illuminate\Support\ServiceProvider;
-use stuartcusackie\StatamicResponsiveRequester\Console\Commands\RequestResponsiveImages;
+use stuartcusackie\StatamicGlideRequester\Console\Commands\RequestGlideImages;
 
-class StatamicResponsiveRequesterServiceProvider extends ServiceProvider
+class StatamicGlideRequesterServiceProvider extends ServiceProvider
 {   
 
     public function boot()
@@ -18,7 +18,7 @@ class StatamicResponsiveRequesterServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                RequestResponsiveImages::class,
+                RequestGlideImages::class,
             ]);
         }
 
