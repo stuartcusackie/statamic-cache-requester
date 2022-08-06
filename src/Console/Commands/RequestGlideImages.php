@@ -75,7 +75,7 @@ class RequestGlideImages extends Command
                     // Handle the sources
                     foreach($pictureEl->find('source') as $sourceEl) {
                         
-                        foreach($this->$sourceAttributes as $attr) {
+                        foreach($this->sourceAttributes as $attr) {
                             
                             if($sourceEl->hasAttribute($attr)) {
 
