@@ -1,22 +1,22 @@
 <?php
 
-namespace stuartcusackie\StatamicResponsiveRequester\Console\Commands;
+namespace stuartcusackie\StatamicGlideRequester\Console\Commands;
 
 use Illuminate\Console\Command;
 use Statamic\Facades\Entry;
 use Illuminate\Support\Facades\Http;
 use simplehtmldom\HtmlDocument;
-use stuartcusackie\StatamicResponsiveRequester\Jobs\VisitGlideUrl;
+use stuartcusackie\StatamicGlideRequester\Jobs\VisitGlideUrl;
 use Illuminate\Support\Str;
 
-class RequestResponsiveImages extends Command
+class RequestGlideImages extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'responsive:request';
+    protected $signature = 'glide:request';
 
     /**
      * The console command description.
@@ -29,6 +29,15 @@ class RequestResponsiveImages extends Command
      * The total images queued
      */
     protected $images = 0;
+    
+    /**
+     * The source attributes
+     * to search for
+     */
+    protected $sourceAttributes = [
+        'srcset',
+        'lazy-srcset'
+    ];
 
     /**
      * Execute the console command.
@@ -37,12 +46,12 @@ class RequestResponsiveImages extends Command
      */
     public function handle()
     {
-        $this->call('queue:clear', ['connection' => 'redis',  '--queue' => 'responsive']);
+        $this->call('queue:clear', ['connection' => 'redis',  '--queue' => 'gliderequester']);
 
         $htmlClient = new HtmlDocument();
         $entries = Entry::all();
 
-        $this->info('Checking for images in all routable entries. This could take quite a while...');
+        $this->info('Checking for glide images in all routable entries. This could take quite a while...');
 
         foreach($entries as $entry) {
 
@@ -65,17 +74,22 @@ class RequestResponsiveImages extends Command
 
                     // Handle the sources
                     foreach($pictureEl->find('source') as $sourceEl) {
-                        $srcset = $sourceEl->getAttribute('srcset');
+                        
+                        foreach($this->$sourceAttributes as $attr) {
+                            
+                            if($sourceEl->hasAttribute($attr)) {
 
-                        foreach(explode(', ', $srcset) as $path) {
-                            $this->addImageJob($path);
+                                foreach(explode(', ', $sourceEl->getAttribute($attr)) as $path) {
+                                    $this->addImageJob($path);
+                                }
+                            }
                         }
                     }
                 }
             }
         }
 
-        $this->info($this->images . ' glide images queued for retrieval. You can now run the responsive queue on redis.');
+        $this->info($this->images . ' glide images queued for retrieval. You can now run the gliderequester queue on redis.');
 
         return 0;
     }
