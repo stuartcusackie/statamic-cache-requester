@@ -15,6 +15,9 @@ composer require stuartcusackie/statamic-glide-requester
 
 This package utilises a Redis queue called **gliderequester**. You must have Redis installed on your server.
 
+## Special Notes
+
+If you are using lazy loading and outputting lazy-srcset instead of srcset on your responsive images then this package will handle them. It also works with data-srcset.
 
 ## Usage
 
