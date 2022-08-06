@@ -13,7 +13,7 @@ composer require stuartcusackie/statamic-glide-requester
 
 ## Requirements
 
-This package utilises a Redis queue called **responsive**. You must have Redis installed on your server.
+This package utilises a Redis queue called **gliderequester**. You must have Redis installed on your server.
 
 
 ## Usage
