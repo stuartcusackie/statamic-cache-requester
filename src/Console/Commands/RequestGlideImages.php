@@ -36,7 +36,8 @@ class RequestGlideImages extends Command
      */
     protected $sourceAttributes = [
         'srcset',
-        'lazy-srcset'
+        'lazy-srcset',
+        'data-srcset'
     ];
 
     /**
