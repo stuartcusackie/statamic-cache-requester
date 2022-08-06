@@ -8,7 +8,7 @@ The purpose of this package is to pre-generate all website images, and alleviate
 ## Installation
 
 ```
-composer require stuartcusackie/statamic-glide-request
+composer require stuartcusackie/statamic-glide-requester
 ```
 
 ## Requirements
@@ -20,7 +20,7 @@ This package utilises a Redis queue called **responsive**. You must have Redis i
 
 This package provides an artisan command that be used like so
 
-`php artisan glide:requester`
+`php artisan glide:request`
 
 The queue can be ran manually with this command:
 
