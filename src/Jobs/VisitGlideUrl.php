@@ -1,6 +1,6 @@
 <?php
 
-namespace stuartcusackie\StatamicResponsiveRequester\Jobs;
+namespace stuartcusackie\StatamicGlideRequester\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -31,7 +31,7 @@ class VisitGlideUrl implements ShouldQueue
     public function __construct(string $url)
     {
         $this->onConnection('redis');
-        $this->onQueue('responsive');
+        $this->onQueue('gliderequester');
         $this->url = $url;
     }
 
