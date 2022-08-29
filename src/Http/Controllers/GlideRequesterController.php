@@ -28,7 +28,7 @@ class GlideRequesterController extends Controller
      */
     public function run(Request $request)
     {   
-        Artisan::call('queue:clear', ['connection' => 'redis',  '--queue' => 'gliderequester']);
+        Artisan::call('queue:clear', ['connection' => 'redis',  '--queue' => 'gliderequester', '--force' => true]);
         Artisan::queue('glide:request')->onConnection('redis')->onQueue('gliderequester');
 
         return back();
