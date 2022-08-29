@@ -30,7 +30,7 @@ return [
     | size for a responsive image, in which case the values below might be
     |
     | 'post_data_attributes' => [
-    |    'data-img-id',
+    |    'data-asset-id',
     | ],
     |    
     | 'asset_view_path' => '/lightbox-image-asset'

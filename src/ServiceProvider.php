@@ -5,8 +5,12 @@ namespace stuartcusackie\StatamicGlideRequester;
 use Statamic\Providers\AddonServiceProvider;
 use Statamic\Facades\Utility;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Event;
+use Statamic\Events\EntrySaved;
+use stuartcusackie\StatamicGlideRequester\StatamicGlideRequester;
 use stuartcusackie\StatamicGlideRequester\Http\Controllers\GlideRequesterController;
 use stuartcusackie\StatamicGlideRequester\Console\Commands\RequestGlideImages;
+use Illuminate\Support\Facades\Log;
 
 class ServiceProvider extends AddonServiceProvider
 {   
@@ -17,6 +21,7 @@ class ServiceProvider extends AddonServiceProvider
 
         $this
             ->registerCommands()
+            ->listen()
             ->makeUtility();
 
     }
@@ -28,6 +33,22 @@ class ServiceProvider extends AddonServiceProvider
         ]);
 
         return $this;
+    }
+
+    protected function listen() {
+
+        Event::listen(function (EntrySaved $event) {
+
+            Log::info('Saved entry queued for glide requests');
+
+            if($event->entry->url) {
+                StatamicGlideRequester::queueUrl(url($event->entry->url));
+            }
+
+        });
+
+        return $this;
+
     }
 
     protected function makeUtility() {

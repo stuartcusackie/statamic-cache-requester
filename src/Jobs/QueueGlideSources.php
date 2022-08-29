@@ -11,10 +11,10 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
 use simplehtmldom\HtmlDocument;
 use Illuminate\Support\Str;
-use stuartcusackie\StatamicGlideRequester\Jobs\VisitGlideUrl;
+use stuartcusackie\StatamicGlideRequester\Jobs\VisitGlideSource;
 use Illuminate\Support\Facades\Log;
 
-class FindElementsAtUrl implements ShouldQueue
+class QueueGlideSources implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -132,7 +132,7 @@ class FindElementsAtUrl implements ShouldQueue
 
                     if(Str::startsWith($path, '/img/')) {
                         Log::info('Adding glide visit for url: ' . url($path));
-                        VisitGlideUrl::dispatch(url($path));
+                        VisitGlideSource::dispatch(url($path));
                     }
                 }
             }

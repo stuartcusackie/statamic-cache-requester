@@ -2,7 +2,11 @@
 
 This Statamic utility searches images and picture sources in your Statamic Entries and adds each url to a Redis queue. The queue can then be processed to retrieve each url and initiate Glide generation.
 
-The purpose of this package is to pre-generate all website images, and alleviate some of the pressure that image-heavy websites put on the server. You will usually only run these commands once on initial deployment of the site, or after any major restructuring of asset filenames and folders.
+The purpose of this package is to pre-generate all website images, and alleviate some of the pressure that image-heavy websites put on the server. This is particularly useful when you have lots of responsive image variants or if you are using Spatie's Statamic Responsive Images package.
+
+You will usually only run these commands once on initial deployment of the site, or after any major restructuring of asset filenames and folders.
+
+The package also listens for EntrySaved events and automatically queues the entry url for processing.
 
 
 ## Installation
@@ -24,7 +28,7 @@ This package utilises a Redis queue called **gliderequester**. You must have Red
 
 ## Usage
 
-This package provides an artisan command that be used like so
+A control panel utility is provided for easy usage. An artisan command is also provided and can be used like so:
 
 `php artisan glide:request`
 

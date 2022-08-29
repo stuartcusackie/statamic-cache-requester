@@ -4,7 +4,7 @@ namespace stuartcusackie\StatamicGlideRequester\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Statamic\Http\Controllers\Controller;
-use Artisan;
+use stuartcusackie\StatamicGlideRequester\StatamicGlideRequester;
 
 class GlideRequesterController extends Controller
 {
@@ -28,9 +28,8 @@ class GlideRequesterController extends Controller
      */
     public function run(Request $request)
     {   
-        Artisan::call('queue:clear', ['connection' => 'redis',  '--queue' => 'gliderequester', '--force' => true]);
-        Artisan::queue('glide:request')->onConnection('redis')->onQueue('gliderequester');
+        StatamicGlideRequester::queueAllEntries();
 
-        return back();
+        return back()->withSuccess(__('All entry urls have been queued for processing.'));
     }
 }

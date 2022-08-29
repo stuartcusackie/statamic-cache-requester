@@ -1,5 +1,5 @@
 @extends('statamic::layout')
-@section('title', __('Rebuild Search'))
+@section('title', __('Glide Requester'))
 
 @section('content')
 
@@ -15,8 +15,8 @@
 
     <div>
         <div class="mb-4">
-            <p class="mb-2">Click the button to run the artisan command and it will search for all pictures and image elements in your entries and assets and queue them up for retrieval. This should greatly reduce initial page load times when lots of new images have been added.</p>
-            <p>Don't forget to set up your config file and make sure your redis worker is running on the <strong>gliderequester</strong> queue.</p>
+            <p class="mb-2">Click the button to queue all entries for image processing. You should only do this when lots of new images are added to multiple entries.</p>
+            <p>This action will clear the current queue. Don't forget to set up your config file and make sure your redis worker is running on the <strong>gliderequester</strong> queue.</p>
         </div>
 
         <form method="POST" action="{{ cp_route('utilities.glide-requester.run') }}">

@@ -3,9 +3,7 @@
 namespace stuartcusackie\StatamicGlideRequester\Console\Commands;
 
 use Illuminate\Console\Command;
-use Statamic\Facades\Entry;
-use Statamic\Facades\Asset;
-use stuartcusackie\StatamicGlideRequester\Jobs\FindElementsAtUrl;
+use stuartcusackie\StatamicGlideRequester\StatamicGlideRequester;
 
 class RequestGlideImages extends Command
 {
@@ -35,17 +33,7 @@ class RequestGlideImages extends Command
      */
     public function handle()
     {
-        $this->call('queue:clear', ['connection' => 'redis',  '--queue' => 'gliderequester']);
-
-        foreach(Entry::all() as $entry) {
-
-            if($entry->url) {
-                FindElementsAtUrl::dispatch(url($entry->url));
-                $this->urls++;
-            }
-        }
-        
-        $this->info($this->urls . ' urls queued for processing. You can now run the gliderequester queue on redis.');
+        StatamicGlideRequester::queueAllEntries();
 
         return 0;
     }
