@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Http;
 use simplehtmldom\HtmlDocument;
 use Illuminate\Support\Str;
 use stuartcusackie\StatamicGlideRequester\Jobs\VisitGlideUrl;
+use Illuminate\Support\Facades\Log;
 
 class FindElementsAtUrl implements ShouldQueue
 {
@@ -130,6 +131,7 @@ class FindElementsAtUrl implements ShouldQueue
                     $path = explode(' ', $path)[0];
 
                     if(Str::startsWith($path, '/img/')) {
+                        Log::info('Adding glide visit for url: ' . url($path));
                         VisitGlideUrl::dispatch(url($path));
                     }
                 }
@@ -142,6 +144,8 @@ class FindElementsAtUrl implements ShouldQueue
             foreach(config('statamic-glide-requester.post_data_attributes') as $attr) {
 
                 if($el->hasAttribute($attr)) {
+
+                    Log::info('Adding asset view visit for asset id: ' . $el->getAttribute($attr));
 
                     $this->dispatch(url(config('statamic-glide-requester.asset_view_path')), 'post', [
                         'id' => $el->getAttribute($attr)

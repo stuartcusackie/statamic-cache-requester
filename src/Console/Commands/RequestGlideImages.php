@@ -29,16 +29,6 @@ class RequestGlideImages extends Command
     protected $urls = 0;
     
     /**
-     * The source attributes
-     * to search for
-     */
-    protected $sourceAttributes = [
-        'srcset',
-        'lazy-srcset',
-        'data-srcset'
-    ];
-
-    /**
      * Execute the console command.
      *
      * @return int
@@ -47,24 +37,6 @@ class RequestGlideImages extends Command
     {
         $this->call('queue:clear', ['connection' => 'redis',  '--queue' => 'gliderequester']);
 
-        $this->checkEntries();
-        
-        $this->info($this->urls . ' urls queued for processing. You can now run the gliderequester queue on redis.');
-
-        return 0;
-    }
-
-    /**
-     * Check all entry urls for matching
-     * source attributes and add any glide images
-     * to the queue.
-     * 
-     * @return void
-     */
-    protected function checkEntries() {
-
-        $this->info('Checking for glide images in all routable entries. This could take quite a while...');
-
         foreach(Entry::all() as $entry) {
 
             if($entry->url) {
@@ -72,6 +44,9 @@ class RequestGlideImages extends Command
                 $this->urls++;
             }
         }
+        
+        $this->info($this->urls . ' urls queued for processing. You can now run the gliderequester queue on redis.');
 
+        return 0;
     }
 }
