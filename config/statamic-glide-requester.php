@@ -22,17 +22,24 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Asset view path
+    | Asset views
     |--------------------------------------------------------------------------
     |
-    | This option is useful when you are requesting single asset views.
+    | These options is useful when you are requesting single asset views.
     | For example, a lightbox component might request a larger
-    | size for a responsive image, in which case the value below
-    | might be '/lightbox-image-asset'.
+    | size for a responsive image, in which case the values below might be
+    |
+    | 'post_data_attributes' => [
+    |    'data-img-id',
+    | ],
+    |    
+    | 'asset_view_path' => '/lightbox-image-asset'
     |
     | This feature assumes you are POSTing the asset id to the url.
     |
     */
+
+    'post_data_attributes' => [],
         
     'asset_view_path' => false
 
