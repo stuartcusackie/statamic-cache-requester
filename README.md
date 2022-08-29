@@ -33,3 +33,8 @@ The queue can be ran manually with this command:
 `php artisan queue:work redis --queue=gliderequester`
 
 But you are probably better off using a Laravel Forge worker, or something similar, as workers are prone to exit prematurely when using the command line.
+
+## Improvements
+
+- Add more detail and flash messages to utility view.
+- Add entry saved event listener to automatically queue up image retrieval for a single url.
