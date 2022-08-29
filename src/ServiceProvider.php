@@ -39,8 +39,6 @@ class ServiceProvider extends AddonServiceProvider
 
         Event::listen(function (EntrySaved $event) {
 
-            Log::info('Saved entry queued for glide requests');
-
             if($event->entry->url) {
                 StatamicGlideRequester::queueUrl(url($event->entry->url));
             }
