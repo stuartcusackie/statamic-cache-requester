@@ -40,7 +40,14 @@ class ServiceProvider extends AddonServiceProvider
         Event::listen(function (EntrySaved $event) {
 
             if($event->entry->url) {
-                StatamicGlideRequester::queueUrl(url($event->entry->url));
+                
+                try{
+                    StatamicGlideRequester::queueUrl(url($event->entry->url));
+                }
+                catch(\RedisException $e){
+                    Log::warning('Redis Error: Could not queue saved entry for glide requesting.');
+                }
+                
             }
 
         });
