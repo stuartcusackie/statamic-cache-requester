@@ -23,19 +23,19 @@ Check the config file for special features such as lightbox image request genera
 ## Commands
 
 ```
-php artisan cache-requester:entries
+php artisan requester:entries
 ```
 If you are using Static caching then It's a good idea to add this command to your deploy script if using forge
 
 
 ```
-php artisan cache-requester:images
+php artisan requester:images
 ```
 You will usually only run this command once on initial deployment of the site, or after any major restructuring of asset filenames and folders.
 
 
 ```
-php artisan cache-requester:clear
+php artisan requester:clear
 ```
 Clears the entry and images queue.
 
