@@ -50,7 +50,7 @@ class StatamicCacheRequester {
      */
     public static function clearQueue() {
 
-        Artisan::call('queue:clear', ['connection' => 'redis',  '--queue' => 'cacherequester', '--force' => true]);
+        Artisan::call('queue:clear redis --queue=cacherequester --force');
 
     }
 
