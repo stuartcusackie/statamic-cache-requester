@@ -33,7 +33,7 @@ class RequestImages extends Command
      */
     public function handle()
     {
-        StatamicCacheRequester::queueAllEntries();
+        StatamicCacheRequester::queueAllImages();
 
         return 0;
     }
