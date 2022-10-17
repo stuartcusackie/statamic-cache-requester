@@ -1,7 +1,7 @@
 {
-    "name": "stuartcusackie/statamic-glide-requester",
+    "name": "stuartcusackie/statamic-cache-requester",
     "license": "MIT",
-    "description": "Checks all of your entry and asset urls for glide images and adds them to a queue for generation.",
+    "description": "This Statamic utility queues up all entry urls for retrieval, which engages the caches and makes first time loads much quicker.",
     "minimum-stability": "dev",
     "require": {
         "php": "^8.0",
@@ -11,7 +11,7 @@
     },
     "autoload": {
         "psr-4": {
-            "stuartcusackie\\StatamicGlideRequester\\": "src"
+            "stuartcusackie\\StatamicCacheRequester\\": "src"
         }
     },
     "authors": [
@@ -24,12 +24,12 @@
     ],
     "extra": {
         "statamic": {
-            "name": "Statamic Glide Requester",
-            "description": "Checks all of your entry and asset urls for glide images and adds them to a queue for generation."
+            "name": "Statamic Cache Requester",
+            "description": "This Statamic utility queues up all entry urls for retrieval, which engages the caches and makes first time loads much quicker."
         },
         "laravel": {
             "providers": [
-                "stuartcusackie\\StatamicGlideRequester\\ServiceProvider"
+                "stuartcusackie\\StatamicCacheRequester\\ServiceProvider"
             ]
         }
     }

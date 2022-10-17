@@ -1,23 +1,25 @@
 <?php
 
-namespace stuartcusackie\StatamicGlideRequester;
+namespace stuartcusackie\StatamicCacheRequester;
 
 use Statamic\Providers\AddonServiceProvider;
 use Statamic\Facades\Utility;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Event;
 use Statamic\Events\EntrySaved;
-use stuartcusackie\StatamicGlideRequester\StatamicGlideRequester;
-use stuartcusackie\StatamicGlideRequester\Http\Controllers\GlideRequesterController;
-use stuartcusackie\StatamicGlideRequester\Console\Commands\RequestGlideImages;
 use Illuminate\Support\Facades\Log;
+use stuartcusackie\StatamicCacheRequester\Http\Controllers\CacheRequesterController;
+use stuartcusackie\StatamicCacheRequester\Jobs\RequestUrl;
+use stuartcusackie\StatamicCacheRequester\Console\Commands\RequestEntries;
+use stuartcusackie\StatamicCacheRequester\Console\Commands\RequestImages;
+use stuartcusackie\StatamicCacheRequester\Console\Commands\ClearRequestQueue;
 
 class ServiceProvider extends AddonServiceProvider
 {   
 
     public function bootAddon()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'statamic-glide-requester');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'statamic-cache-requester');
 
         $this
             ->registerCommands()
@@ -29,7 +31,9 @@ class ServiceProvider extends AddonServiceProvider
     protected function registerCommands()
     {
         $this->commands([
-            RequestGlideImages::class,
+            RequestEntries::class,
+            RequestImages::class,
+            ClearRequestQueue::class,
         ]);
 
         return $this;
@@ -42,10 +46,10 @@ class ServiceProvider extends AddonServiceProvider
             if($event->entry->url) {
                 
                 try{
-                    StatamicGlideRequester::queueUrl(url($event->entry->url));
+                    RequestUrl::dispatch(url($event->entry->url), true);
                 }
                 catch(\RedisException $e){
-                    Log::warning('Redis Error: Could not queue saved entry for glide requesting.');
+                    Log::warning('Redis Error: Could not queue saved entry for image requesting.');
                 }
                 
             }
@@ -58,13 +62,15 @@ class ServiceProvider extends AddonServiceProvider
 
     protected function makeUtility() {
 
-        Utility::make('glide-requester')
-            ->title('Glide Requester')
+        Utility::make('cache-requester')
+            ->title('Cache Requester')
             ->navTitle('Requester')
-            ->description('Checks all of your entry and asset urls for glide images and adds them to a queue for generation.')
+            ->description('Engages caches for all of your entry urls and queues up images for glide generation.')
             ->routes(function (Router $router) {
-                $router->get('/', [GlideRequesterController::class, 'show'])->name('show');
-                $router->post('/run', [GlideRequesterController::class, 'run'])->name('run');
+                $router->get('/', [CacheRequesterController::class, 'show'])->name('show');
+                $router->post('/process-entries', [CacheRequesterController::class, 'processEntries'])->name('process-entries');
+                $router->post('/process-images', [CacheRequesterController::class, 'processImages'])->name('process-images');
+                $router->post('/clear-queue', [CacheRequesterController::class, 'clearQueue'])->name('clear-queue');
             })
             ->register();
 

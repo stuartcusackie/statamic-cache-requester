@@ -1,39 +1,51 @@
-# Statamic Glide Image Requester
+# Statamic Cache Requester
 
-This Statamic utility searches images and picture sources in your Statamic Entries and adds each url to a Redis queue. The queue can then be processed to retrieve each url and initiate Glide generation.
+This Statamic utility queues up all entry urls for retrieval, which engages the caches and makes first time loads much quicker. 
 
-The purpose of this package is to pre-generate all website images, and alleviate some of the pressure that image-heavy websites put on the server. This is particularly useful when you have lots of responsive image variants or if you are using Spatie's Statamic Responsive Images package.
+The utility can also search for all image and picture sources within your entries and queue them up for a separate retrieval and initiate Glide generation. This is particularly useful when you have lots of responsive image variants or if you are using Spatie's Statamic Responsive Images package. This can fix server crashes for image heavy websites where Glide has a lot of processing to perform.
 
-You will usually only run these commands once on initial deployment of the site, or after any major restructuring of asset filenames and folders.
-
-The package also listens for EntrySaved events and automatically queues the entry url for processing.
+The package also listens for EntrySaved events and automatically queues the entry url for image requests.
 
 
 ## Installation
 
 ```
-composer require stuartcusackie/statamic-glide-requester
-
+composer require stuartcusackie/statamic-cache-requester
 ```
 
 ```
-php please vendor:publish --tag=statamic-glide-requester-config
+php please vendor:publish --tag=statamic-cache-requester-config
 ```
 
-Check the config file for special features.
+Check the config file for special features such as lightbox image requeest generation.
 
-## Requirements
 
-This package utilises a Redis queue called **gliderequester**. You must have Redis installed on your server.
+## Commands
 
-## Usage
+```
+php artisan cache-requester:entries
+```
+If you are using Static caching then It's a good idea to add this command to your deploy script if using forge
 
-A control panel utility is provided for easy usage. An artisan command is also provided and can be used like so:
 
-`php artisan glide:request`
+```
+php artisan cache-requester:images
+```
+You will usually only run this command once on initial deployment of the site, or after any major restructuring of asset filenames and folders.
+
+
+```
+php artisan cache-requester:clear
+```
+Clears the entry and images queue.
+
+
+## Queues
+
+This package utilises a Redis queue called **cacherequester**. You must have Redis installed on your server.
 
 The queue can be ran manually with this command:
 
-`php artisan queue:work redis --queue=gliderequester`
+`php artisan queue:work redis --queue=cacherequester`
 
 But you are probably better off using a Laravel Forge worker, or something similar, as workers are prone to exit prematurely when using the command line.
