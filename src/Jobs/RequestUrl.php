@@ -156,7 +156,7 @@ class RequestUrl implements ShouldQueue
                 if($el->hasAttribute($attr)) {
                         
                     // Dispatch a new job for a post request image
-                    $this->dispatch(url(config('statamic-cache-requester.asset_view_path')), 'post', [
+                    $this->dispatch(url(config('statamic-cache-requester.asset_view_path')), false, 'post', [
                         'id' => $el->getAttribute($attr)
                     ]);
                     
