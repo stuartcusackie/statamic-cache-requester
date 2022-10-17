@@ -17,7 +17,7 @@ composer require stuartcusackie/statamic-cache-requester
 php please vendor:publish --tag=statamic-cache-requester-config
 ```
 
-Check the config file for special features such as lightbox image requeest generation.
+Check the config file for special features such as lightbox image request generation.
 
 
 ## Commands
