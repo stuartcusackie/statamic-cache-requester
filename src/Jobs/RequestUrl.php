@@ -13,7 +13,7 @@ use simplehtmldom\HtmlDocument;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 
-class RequestEntry implements ShouldQueue
+class RequestUrl implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 

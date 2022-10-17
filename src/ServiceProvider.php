@@ -65,7 +65,7 @@ class ServiceProvider extends AddonServiceProvider
         Utility::make('cache-requester')
             ->title('Cache Requester')
             ->navTitle('Requester')
-            ->description('Engages caches for all of your entry urls and queues up images for glide generation.')
+            ->description('Engages caches for all entries and queues up images for glide generation.')
             ->routes(function (Router $router) {
                 $router->get('/', [CacheRequesterController::class, 'show'])->name('show');
                 $router->post('/process-entries', [CacheRequesterController::class, 'processEntries'])->name('process-entries');
