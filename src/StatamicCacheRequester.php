@@ -50,7 +50,10 @@ class StatamicCacheRequester {
      */
     public static function clearQueue() {
 
-        Artisan::call('queue:clear redis --queue=cacherequester --force');
+        $connection = config('statamic-cache-requester.queue_connection');
+        $queue = config('statamic-cache-requester.queue_name');
+
+        Artisan::call("queue:clear {$connection} --queue={$queue} --force");
 
     }
 

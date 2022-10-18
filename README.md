@@ -6,8 +6,6 @@ The utility can also search for all image and picture sources within your entrie
 
 The package also listens for EntrySaved events and automatically queues the entry url for image requests.
 
-**CAUTION:** Image processing can take a lot of work for image heavy websites (10,000+ images). When using responsive images there could be an additional 10 variants per image (10,000 becomes 1,000,000). Keep an eye on your CPU usage, especially if using a hosting server that limits CPU (e.g. AWS-EC2).
-
 
 ## Installation
 
@@ -19,7 +17,7 @@ composer require stuartcusackie/statamic-cache-requester
 php please vendor:publish --tag=statamic-cache-requester-config
 ```
 
-Check the config file for special features such as lightbox image request generation.
+Check the config file for special features such as queue configuration and lightbox image request generation.
 
 
 ## Commands
@@ -44,9 +42,9 @@ Clears the entry and images queue.
 
 ## Queues
 
-This package utilises a Redis queue called **cacherequester**. You must have Redis installed on your server.
+By default, this package utilises a Redis queue called **cacherequester**. You can configure the package to use whatever queue and connection that you prefer.
 
-The queue can be ran manually with this command:
+The default queue can be ran manually with this command:
 
 `php artisan queue:work redis --queue=cacherequester`
 
