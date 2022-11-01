@@ -6,7 +6,7 @@ The utility can also search for all image and picture sources within your entrie
 
 The package also listens for EntrySaved events and automatically queues the entry url for image requests.
 
-**CAUTION:** Image processing can take a lot of work for image heavy websites (10,000+ images). When using responsive images there could be an additional 20 variants per image (10,000 becomes 2,000,000). Keep an eye on your CPU usage, especially if using a hosting server that limits CPU (e.g. AWS-EC2).
+**CAUTION:** Glide image manipulation can take a lot of work, especially when using responsive image variants and jpeg fallbacks. For example a site using Spatie's responsive images addon could have 10 sizes and 2 formats per image. If this site has 1000 images then 20,000 variants will need to be manipulated by Glide. Keep an eye on your CPU usage, especially if using a hosting server that limits CPU (e.g. AWS-EC2).
 
 
 ## Installation
