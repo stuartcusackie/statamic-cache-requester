@@ -6,7 +6,7 @@ The utility can also search for all image and picture sources within your entrie
 
 The package also listens for EntrySaved events and automatically queues the entry url for image requests.
 
-**CAUTION:** Image processing can take a lot of work for image heavy websites (10,000+ images). When using responsive images there could be an additional 10 variants per image (10,000 becomes 1,000,000). Keep an eye on your CPU usage, especially if using a hosting server that limits CPU (e.g. AWS-EC2).
+**CAUTION:** Image processing can take a lot of work for image heavy websites (10,000+ images). When using responsive images there could be an additional 20 variants per image (10,000 becomes 2,000,000). Keep an eye on your CPU usage, especially if using a hosting server that limits CPU (e.g. AWS-EC2).
 
 
 ## Installation
