@@ -54,6 +54,23 @@ return [
 
     'post_data_attributes' => [],
         
-    'asset_view_path' => false
+    'asset_view_path' => false,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Custom routing
+    |--------------------------------------------------------------------------
+    |
+    | If you are using a custom routing system that uses placeholder slugs for
+    | entries in other collections then enter them here and the utility
+    | will replace them when requesting urls.
+    |
+    | The format is as follows:
+    | 'slug_replacements' => [
+    |      'placeholder' => 'entry_field'
+    | ]
+    */
+
+    'slug_replacements' => []
 
 ];

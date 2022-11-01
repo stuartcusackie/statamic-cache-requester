@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
+use Statamic\Facades\Entry;
 use simplehtmldom\HtmlDocument;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
@@ -59,7 +60,7 @@ class RequestUrl implements ShouldQueue
         $this->onConnection(config('statamic-cache-requester.queue_connection'));
         $this->onQueue(config('statamic-cache-requester.queue_name'));
 
-        $this->url = $url;
+        $this->url = $this->applyUrlManipulations($url);
         $this->processImages = $processImages;
         $this->requestType = $requestType;
         $this->postData = $postData;
@@ -86,6 +87,37 @@ class RequestUrl implements ShouldQueue
         if($this->processImages) {
             $this->processImages($response->body());
         }
+    }
+
+    /**
+     * If placeholder slug replacements hav been provided then
+     * attempt to modify the urls based on those.
+     * 
+     * @param string $url
+     * @return string
+     */
+    protected function applyUrlManipulations(string $url) {
+
+        foreach(config('statamic-cache-requester.slug_replacements') as $placeholder => $field) {
+
+            if(str_contains($url, $placeholder)) {
+
+                $parts = parse_url($url);
+                // Log::debug('Found a placeholder for url: ' . $url);
+
+                if($entry = Entry::findByUri($parts['path'])) {
+
+                    if(isset($entry->{$field}) && isset($entry->{$field}->slug)) {
+                        $url = str_replace($placeholder, $entry->{$field}->slug, $url);
+                        // Log::debug('Made slug placeholder replacements: ' . $url);
+                    }
+                    
+                }
+            }
+        }
+
+        return $url;
+
     }
 
     /**
