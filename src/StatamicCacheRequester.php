@@ -20,7 +20,14 @@ class StatamicCacheRequester {
         foreach(Entry::all() as $entry) {
 
             if($entry->url) {
-                RequestUrl::dispatch(url($entry->url));
+
+                try {
+                    RequestUrl::dispatch(url($entry->url));
+                }
+                catch(\Throwable $e){
+                    throw new \Exception('Could not queue an entry for cache requesting.');
+                }
+
             }
 
         }
@@ -38,7 +45,14 @@ class StatamicCacheRequester {
         foreach(Entry::all() as $entry) {
 
             if($entry->url) {
-                RequestUrl::dispatch(url($entry->url), true);
+
+                try {
+                    RequestUrl::dispatch(url($entry->url), true);
+                }
+                catch(\Throwable $e){
+                    throw new \Exception('Could not queue entry for image cache requesting.');
+                }
+
             }
         }
     }
@@ -53,7 +67,12 @@ class StatamicCacheRequester {
         $connection = config('statamic-cache-requester.queue_connection');
         $queue = config('statamic-cache-requester.queue_name');
 
-        Artisan::call("queue:clear {$connection} --queue={$queue} --force");
+        try {
+            Artisan::call("queue:clear {$connection} --queue={$queue} --force");
+        }
+        catch(\Throwable $e){
+            throw new \Exception('Could not clear cache requester queue.');
+        }
 
     }
 

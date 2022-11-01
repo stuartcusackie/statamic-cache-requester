@@ -48,8 +48,8 @@ class ServiceProvider extends AddonServiceProvider
                 try{
                     RequestUrl::dispatch(url($event->entry->url), true);
                 }
-                catch(\RedisException $e){
-                    Log::warning('Redis Error: Could not queue saved entry for image requesting.');
+                catch(\Throwable $e){
+                    Log::warning('Could not queue saved entry for cache requesting.');
                 }
                 
             }
@@ -65,6 +65,7 @@ class ServiceProvider extends AddonServiceProvider
         Utility::make('cache-requester')
             ->title('Cache Requester')
             ->navTitle('Requester')
+            ->icon('cache')
             ->description('Engages caches for all entries and queues up images for glide generation.')
             ->routes(function (Router $router) {
                 $router->get('/', [CacheRequesterController::class, 'show'])->name('show');

@@ -5,6 +5,7 @@ namespace stuartcusackie\StatamicCacheRequester\Http\Controllers;
 use Illuminate\Http\Request;
 use Statamic\Http\Controllers\Controller;
 use stuartcusackie\StatamicCacheRequester\StatamicCacheRequester;
+use Illuminate\Support\Facades\Log;
 
 class CacheRequesterController extends Controller
 {
@@ -28,7 +29,12 @@ class CacheRequesterController extends Controller
      */
     public function processEntries(Request $request)
     {   
-        StatamicCacheRequester::queueAllEntries();
+        try {
+            StatamicCacheRequester::queueAllEntries();
+        }
+        catch(\Exception $e){
+            return back()->withError(__('Error: check that your queue is available.'));
+        }
 
         return back()->withSuccess(__('All entry urls have been queued for retrieval.'));
     }
@@ -42,7 +48,12 @@ class CacheRequesterController extends Controller
      */
     public function processImages(Request $request)
     {   
-        StatamicCacheRequester::queueAllImages();
+        try {
+            StatamicCacheRequester::queueAllImages();
+        }
+        catch(\Exception $e){
+            return back()->withError(__('Error: check that your queue is available'));
+        }
 
         return back()->withSuccess(__('All entry urls and images have been queued for retrieval.'));
     }
@@ -55,7 +66,12 @@ class CacheRequesterController extends Controller
      */
     public function clearQueue(Request $request)
     {   
-        StatamicCacheRequester::clearQueue();
+        try {
+            StatamicCacheRequester::clearQueue();
+        }
+        catch(\Exception $e){
+            return back()->withError(__('Error: check that your queue is available.'));
+        }
 
         return back()->withSuccess(__('Cache requester queue has been cleared.'));
     }

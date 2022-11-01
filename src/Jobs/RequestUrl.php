@@ -142,7 +142,13 @@ class RequestUrl implements ShouldQueue
 
                     // Dispatch a new job for a simple image
                     if(Str::startsWith($path, '/img/')) {
-                        $this->dispatch(url($path));
+
+                        try {
+                            $this->dispatch(url($path));
+                        }
+                        catch(\Throwable $e){
+                            Log::warning('Could not queue img src for cache requesting.');
+                        }
                     }
                 }
             }
@@ -153,13 +159,17 @@ class RequestUrl implements ShouldQueue
 
             foreach(config('statamic-cache-requester.post_data_attributes') as $attr) {
 
+                // Dispatch a new job for a post request image
                 if($el->hasAttribute($attr)) {
-                        
-                    // Dispatch a new job for a post request image
-                    $this->dispatch(url(config('statamic-cache-requester.asset_view_path')), false, 'post', [
-                        'id' => $el->getAttribute($attr)
-                    ]);
                     
+                    try {
+                        $this->dispatch(url(config('statamic-cache-requester.asset_view_path')), false, 'post', [
+                            'id' => $el->getAttribute($attr)
+                        ]);
+                    }
+                    catch(\Throwable $e){
+                        Log::warning('Could not queue asset view for cache requesting.');
+                    }
                 }
             }
         }
