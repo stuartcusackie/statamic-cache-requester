@@ -34,7 +34,7 @@ If you are using Static caching then **it's a good idea to add this command to y
 ```
 php artisan requester:images
 ```
-You will usually only run this command once on initial deployment of the site, or after any major restructuring of asset filenames and folders.
+You will usually only run this command once on initial deployment of the site, or after any major restructuring of asset filenames and folders. I don't recommend adding this to your deployment script as images rarely change.
 <br/><br/>
 
 ```
