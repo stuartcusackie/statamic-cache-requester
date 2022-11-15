@@ -29,21 +29,19 @@ Check the config file for special features such as queue configuration and light
 php artisan requester:entries
 ```
 If you are using Static caching then **it's a good idea to add this command to your deploy script if using forge.** Deployments clear the static cache so this will rebuild it for all entries afterwards.
-
-
+<br/><br/>
 
 ```
 php artisan requester:images
 ```
 You will usually only run this command once on initial deployment of the site, or after any major restructuring of asset filenames and folders.
-
-
+<br/><br/>
 
 ```
 php artisan requester:clear
 ```
 Clears the defined queue. Be careful if using the default queue or a shared queue as all jobs will be removed.
-
+<br/><br/>
 
 ## Queues
 
