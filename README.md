@@ -31,10 +31,12 @@ php artisan requester:entries
 If you are using Static caching then **it's a good idea to add this command to your deploy script if using forge.** Deployments clear the static cache so this will rebuild it for all entries afterwards.
 
 
+
 ```
 php artisan requester:images
 ```
 You will usually only run this command once on initial deployment of the site, or after any major restructuring of asset filenames and folders.
+
 
 
 ```
