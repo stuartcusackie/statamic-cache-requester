@@ -18,8 +18,6 @@ class ServiceProvider extends AddonServiceProvider
 
     public function bootAddon()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'statamic-cache-requester');
-
         $this
             ->registerCommands()
             ->listen();

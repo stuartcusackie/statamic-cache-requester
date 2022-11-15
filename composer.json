@@ -23,15 +23,14 @@
         }
     ],
     "extra": {
+        "statamic": {
+            "name": "Statamic Cache Requester",
+            "description": "Artisan commands that queue up entry and glide urls for retrieval, which engages the caches and makes first time loads much quicker."
+        },
         "laravel": {
             "providers": [
                 "stuartcusackie\\StatamicCacheRequester\\ServiceProvider"
             ]
-        }
-    },
-    "config": {
-        "allow-plugins": {
-            "pixelfear/composer-dist-plugin": true
         }
     }
 }
