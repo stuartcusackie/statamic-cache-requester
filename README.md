@@ -4,7 +4,7 @@ Artisan commands that queue up entry and glide urls for retrieval, which engages
 
 This package can do two things:
 1. Queue up all entry urls for retrieval which automatically engages the static cache, making first time loads quicker.
-2. Search for all image and picture sources within your entries and queue them up for a separate retrieval to initiate Glide generation. This means that all images and responsive variants will be pre-generated for your first visitor. This is particularly useful when you have lots of responsive image variants or if you are using Spatie's Statamic Responsive Images package and it can fix server crashes for image heavy websites where Glide has a lot of processing to perform.
+2. Search for all image and picture sources within your entries and queue them up for a separate retrieval to initiate Glide generation. This means that all images and responsive variants will be pre-generated for your first visitor. This is particularly useful when you have lots of responsive image variants or if you are using Spatie's Statamic Responsive Images package. It can help to avoid server crashes for image heavy websites where Glide has a lot of processing to perform.
 
 The package also listens for EntrySaved events and automatically queues the entry url for image requests (number 2 above).
 
