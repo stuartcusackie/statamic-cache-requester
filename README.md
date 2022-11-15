@@ -40,7 +40,7 @@ You will usually only run this command once on initial deployment of the site, o
 ```
 php artisan requester:clear
 ```
-Clears the defined queue. Be careful if using the default queue or a shared queue as all jobs will be removed.
+Clears the configured queue. Be careful if using the default queue or a shared queue as all jobs will be removed.
 <br/><br/>
 
 ## Queues
