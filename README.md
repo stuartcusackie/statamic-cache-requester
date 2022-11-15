@@ -1,10 +1,12 @@
 # Statamic Cache Requester
 
-This Statamic utility queues up all entry urls for retrieval, which engages the caches and makes first time loads much quicker. 
+Artisan commands that queue up entry and glide urls for retrieval, which engages the caches and makes first time loads much quicker.
 
-The utility can also search for all image and picture sources within your entries and queue them up for a separate retrieval and initiate Glide generation. This is particularly useful when you have lots of responsive image variants or if you are using Spatie's Statamic Responsive Images package. This can fix server crashes for image heavy websites where Glide has a lot of processing to perform.
+This package can do two things:
+1. Queue up all entry urls for retrieval which automatically engages the static cache, making first time loads quicker.
+2. Search for all image and picture sources within your entries and queue them up for a separate retrieval to initiate Glide generation. This is particularly useful when you have lots of responsive image variants or if you are using Spatie's Statamic Responsive Images package. This can fix server crashes for image heavy websites where Glide has a lot of processing to perform.
 
-The package also listens for EntrySaved events and automatically queues the entry url for image requests.
+The package also listens for EntrySaved events and automatically queues the entry url for image requests (number 2 above).
 
 **CAUTION:** Glide image manipulation can take a lot of work, especially when using responsive image variants and jpeg fallbacks. For example, a site using Spatie's responsive images addon could have 10 sizes and 2 formats per image. If this site has 1000 images then 20,000 variants will need to be manipulated by Glide. Keep an eye on your CPU usage, especially if using a hosting server that limits CPU (e.g. AWS-EC2).
 
@@ -27,7 +29,7 @@ Check the config file for special features such as queue configuration and light
 ```
 php artisan requester:entries
 ```
-If you are using Static caching then It's a good idea to add this command to your deploy script if using forge
+If you are using Static caching then **it's a good idea to add this command to your deploy script if using forge.** Deployments clear the static cache so this will rebuild it for all entries afterwards.
 
 
 ```
@@ -39,15 +41,15 @@ You will usually only run this command once on initial deployment of the site, o
 ```
 php artisan requester:clear
 ```
-Clears the entry and images queue.
+Clears the defined queue. Be careful if using the default queue or a shared queue as all jobs will be removed.
 
 
 ## Queues
 
-By default, this package utilises a Redis queue called **cacherequester**. You can configure the package to use whatever queue and connection that you prefer.
+This package utilises a Redis queue called **cacherequester**. You can configure the package to use whatever queue and connection that you prefer but it's probably best not to use a shared queue or the default queue.
 
-The default queue can be ran manually with this command:
+The queue can be ran manually with this command:
 
 `php artisan queue:work redis --queue=cacherequester`
 
-But you are probably better off using a Laravel Forge worker, or something similar, as workers are prone to exit prematurely when using the command line.
+I recommend using a Laravel Forge worker, or something similar, as workers are prone to exit prematurely when using the command line.

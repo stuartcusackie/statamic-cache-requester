@@ -1,7 +1,7 @@
 {
     "name": "stuartcusackie/statamic-cache-requester",
     "license": "MIT",
-    "description": "This Statamic utility queues up all entry urls for retrieval, which engages the caches and makes first time loads much quicker.",
+    "description": "Artisan commands that queue up entry and glide urls for retrieval, which engages the caches and makes first time loads much quicker.",
     "minimum-stability": "dev",
     "require": {
         "php": "^8.0",
@@ -23,10 +23,6 @@
         }
     ],
     "extra": {
-        "statamic": {
-            "name": "Statamic Cache Requester",
-            "description": "This Statamic utility queues up all entry urls for retrieval, which engages the caches and makes first time loads much quicker."
-        },
         "laravel": {
             "providers": [
                 "stuartcusackie\\StatamicCacheRequester\\ServiceProvider"

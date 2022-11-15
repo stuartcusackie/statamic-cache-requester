@@ -8,7 +8,6 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Event;
 use Statamic\Events\EntrySaved;
 use Illuminate\Support\Facades\Log;
-use stuartcusackie\StatamicCacheRequester\Http\Controllers\CacheRequesterController;
 use stuartcusackie\StatamicCacheRequester\Jobs\RequestUrl;
 use stuartcusackie\StatamicCacheRequester\Console\Commands\RequestEntries;
 use stuartcusackie\StatamicCacheRequester\Console\Commands\RequestImages;
@@ -23,8 +22,7 @@ class ServiceProvider extends AddonServiceProvider
 
         $this
             ->registerCommands()
-            ->listen()
-            ->makeUtility();
+            ->listen();
 
     }
 
@@ -57,23 +55,6 @@ class ServiceProvider extends AddonServiceProvider
         });
 
         return $this;
-
-    }
-
-    protected function makeUtility() {
-
-        Utility::make('cache-requester')
-            ->title('Cache Requester')
-            ->navTitle('Requester')
-            ->icon('cache')
-            ->description('Engages caches for all entries and queues up images for glide generation.')
-            ->routes(function (Router $router) {
-                $router->get('/', [CacheRequesterController::class, 'show'])->name('show');
-                $router->post('/process-entries', [CacheRequesterController::class, 'processEntries'])->name('process-entries');
-                $router->post('/process-images', [CacheRequesterController::class, 'processImages'])->name('process-images');
-                $router->post('/clear-queue', [CacheRequesterController::class, 'clearQueue'])->name('clear-queue');
-            })
-            ->register();
 
     }
 }

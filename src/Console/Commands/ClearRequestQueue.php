@@ -3,7 +3,7 @@
 namespace stuartcusackie\StatamicCacheRequester\Console\Commands;
 
 use Illuminate\Console\Command;
-use stuartcusackie\StatamicCacheRequester\StatamicGlideRequester;
+use Artisan;
 
 class ClearRequestQueue extends Command
 {
@@ -28,7 +28,16 @@ class ClearRequestQueue extends Command
      */
     public function handle()
     {
-        StatamicCacheRequester::queueAllEntries();
+        $connection = config('statamic-cache-requester.queue_connection');
+        $queue = config('statamic-cache-requester.queue_name');
+
+        try {
+            Artisan::call("queue:clear {$connection} --queue={$queue} --force");
+            $this->info("{$connection}:{$queue} queue has been cleared");
+        }
+        catch(\Throwable $e){
+            throw new \Exception('Could not clear cache requester queue.');
+        }
 
         return 0;
     }

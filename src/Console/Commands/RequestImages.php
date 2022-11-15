@@ -3,7 +3,8 @@
 namespace stuartcusackie\StatamicCacheRequester\Console\Commands;
 
 use Illuminate\Console\Command;
-use stuartcusackie\StatamicCacheRequester\StatamicCacheRequester;
+use Statamic\Facades\Entry;
+use stuartcusackie\StatamicCacheRequester\Jobs\RequestUrl;
 
 class RequestImages extends Command
 {
@@ -33,7 +34,25 @@ class RequestImages extends Command
      */
     public function handle()
     {
-        StatamicCacheRequester::queueAllImages();
+        $this->call('requester:clear');
+        $count = 0;
+
+        foreach(Entry::all() as $entry) {
+
+            if($entry->url) {
+
+                try {
+                    RequestUrl::dispatch(url($entry->url), true);
+                    $count++;
+                }
+                catch(\Throwable $e){
+                    throw new \Exception('Could not queue entry for image cache requesting.');
+                }
+
+            }
+        }
+
+        $this->info("{$count} entries have been queued for public url and image retrieval.");
 
         return 0;
     }

@@ -3,7 +3,8 @@
 namespace stuartcusackie\StatamicCacheRequester\Console\Commands;
 
 use Illuminate\Console\Command;
-use stuartcusackie\StatamicCacheRequester\StatamicCacheRequester;
+use Statamic\Facades\Entry;
+use stuartcusackie\StatamicCacheRequester\Jobs\RequestUrl;
 
 class RequestEntries extends Command
 {
@@ -33,7 +34,26 @@ class RequestEntries extends Command
      */
     public function handle()
     {
-        StatamicCacheRequester::queueAllEntries();
+        $this->call('requester:clear');
+        $count = 0;
+
+        foreach(Entry::all() as $entry) {
+
+            if($entry->url) {
+
+                try {
+                    RequestUrl::dispatch(url($entry->url));
+                    $count++;
+                }
+                catch(\Throwable $e){
+                    throw new \Exception('Could not queue an entry for cache requesting.');
+                }
+
+            }
+
+        }
+
+        $this->info("{$count} entries have been queued for public url retrieval.");
 
         return 0;
     }
