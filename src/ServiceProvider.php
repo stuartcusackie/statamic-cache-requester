@@ -7,8 +7,7 @@ use Statamic\Facades\Utility;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Event;
 use Statamic\Events\EntrySaved;
-use Illuminate\Support\Facades\Log;
-use stuartcusackie\StatamicCacheRequester\Jobs\RequestUrl;
+use stuartcusackie\StatamicCacheRequester\Listeners\EntrySavedListener;
 use stuartcusackie\StatamicCacheRequester\Console\Commands\RequestEntries;
 use stuartcusackie\StatamicCacheRequester\Console\Commands\RequestImages;
 use stuartcusackie\StatamicCacheRequester\Console\Commands\ClearRequestQueue;
@@ -20,7 +19,7 @@ class ServiceProvider extends AddonServiceProvider
     {
         $this
             ->registerCommands()
-            ->listen();
+            ->registerListeners();
 
     }
 
@@ -35,22 +34,9 @@ class ServiceProvider extends AddonServiceProvider
         return $this;
     }
 
-    protected function listen() {
+    protected function registerListeners() {
 
-        Event::listen(function (EntrySaved $event) {
-
-            if($event->entry->url) {
-                
-                try{
-                    RequestUrl::dispatch(url($event->entry->url), true);
-                }
-                catch(\Throwable $e){
-                    Log::warning('Could not queue saved entry for cache requesting.');
-                }
-                
-            }
-
-        });
+        Event::listen(EntrySaved::class, EntrySavedListener::class);
 
         return $this;
 
