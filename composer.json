@@ -6,7 +6,7 @@
     "require": {
         "php": "^8.0",
         "laravel/framework": "^8.0 || ^9.0",
-        "statamic/cms": "~3.3.12",
+        "statamic/cms": "~3.3",
         "simplehtmldom/simplehtmldom": "^2.0@RC"
     },
     "autoload": {
