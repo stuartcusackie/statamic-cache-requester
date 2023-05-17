@@ -52,3 +52,8 @@ The queue can be ran manually with this command:
 `php artisan queue:work redis --queue=cacherequester`
 
 I recommend using a Laravel Forge worker, or something similar, as workers are prone to exit prematurely when using the command line.
+
+## Todo
+
+- Add terms to entry requests
+- Add multisite functionality
