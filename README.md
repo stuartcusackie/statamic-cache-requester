@@ -1,6 +1,6 @@
 # Statamic Cache Requester
 
-Artisan commands that queue up entry and glide urls for retrieval, which engages the caches and makes first time loads much quicker.
+Artisan commands that queue up entry and glide urls for retrieval, which engages the caches and makes first time loads much quicker. Note that this package provides no benefict to Statamic applications that save cached images, i.e. cache => true.
 
 This package can do a few things:
 1. Queue up all entry urls for retrieval which automatically engages the static cache, making first time loads quicker. UPDATE: Statamic actually has a built in function for this which should be preferable - `static:warm`
