@@ -57,3 +57,4 @@ I recommend using a Laravel Forge worker, or something similar, as workers are p
 
 - Add terms to entry requests
 - Add multisite functionality
+- Experiment with EntryCreated events to process images
