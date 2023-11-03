@@ -36,7 +36,9 @@ class ServiceProvider extends AddonServiceProvider
 
     protected function registerListeners() {
 
-        Event::listen(EntrySaved::class, EntrySavedListener::class);
+        if(config('statamic-cache-requester.request_on_entry_save', true)) {
+            Event::listen(EntrySaved::class, EntrySavedListener::class);
+        }
 
         return $this;
 
