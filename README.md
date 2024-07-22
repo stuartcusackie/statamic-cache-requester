@@ -28,7 +28,7 @@ Check the config file for special features such as queue configuration and light
 ```
 php artisan requester:entries
 ```
-If you are using Static caching then **it's a good idea to add this command to your deploy script (e.g. Forge).** Deployments clear the static cache so this will rebuild it for all entries afterwards.
+This one basically does the same as `php please static:warm`. If you are using Static caching then **it's a good idea to add either one of these commands to your deploy script (e.g. Forge).** Deployments clear the static cache so this will rebuild it for all entries afterwards.
 <br/><br/>
 
 ```
