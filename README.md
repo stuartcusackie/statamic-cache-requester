@@ -34,7 +34,7 @@ This one basically does the same as `php please static:warm`. If you are using S
 ```
 php artisan requester:images
 ```
-You will usually only run this command once on initial deployment of the site, or after any major restructuring of asset filenames and folders. I do **not** recommend adding this to your deployment script as images rarely change.
+This one queues up jobs to visit every entry url and scan them for image urls, which will also then be queued as jobs for visiting. This process prepares all of your images in advance, but it can take a long time to run. You will usually only run this command once on initial deployment of the site, or after any major restructuring of asset filenames and folders. I do **not** recommend adding this to your deployment script as images rarely change.
 <br/><br/>
 
 ```
