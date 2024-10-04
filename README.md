@@ -29,6 +29,7 @@ Check the config file for special features such as queue configuration and light
 php artisan requester:entries
 ```
 If you are using Static caching then **it's a good idea to add this command to your deploy script (e.g. Forge).** Deployments clear the static cache so this will rebuild it for all entries afterwards.
+UPDATE: Statamic actually has a built in function for this which should be preferable - `static:warm`
 <br/><br/>
 
 ```
@@ -52,3 +53,4 @@ This package utilises a 'cacherequester' queue on the default connection. You ca
 - Add terms to entry requests
 - Add multisite functionality
 - Experiment with EntryCreated events to process images
+- Remove 
