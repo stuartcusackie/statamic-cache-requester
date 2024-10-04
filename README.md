@@ -45,7 +45,7 @@ Clears the configured queue. Be careful if using the default queue or a shared q
 
 ## Queues
 
-This package utilises the default queue connection and name. You can set up a separate queue name in the config.
+This package utilises the default queue connection and name. You can define a separate queue name using the STATAMIC_CACHE_REQUESTER_QUEUE_NAME env variable.
 
 The queue can be ran manually with this command:
 
