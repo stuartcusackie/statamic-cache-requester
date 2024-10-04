@@ -32,7 +32,13 @@ class ClearRequestQueue extends Command
         $queue = config('statamic-cache-requester.queue.name');
 
         try {
-            Artisan::call("queue:clear {$connection} --queue={$queue} --force");
+            if($connection == 'default') {
+                Artisan::call("queue:clear --queue={$queue} --force");
+            }
+            else {
+                Artisan::call("queue:clear {$connection} --queue={$queue} --force");
+            }
+            
             $this->info("{$connection}:{$queue} queue has been cleared");
         }
         catch(\Throwable $e){
