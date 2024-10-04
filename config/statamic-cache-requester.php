@@ -21,7 +21,10 @@ return [
     | Define your queue settings here.
     |
     */
-    'queue_name' => env('STATAMIC_CACHE_REQUESTER_QUEUE_NAME', 'cacherequester'),
+    'queue' => [
+        'connection' => env('STATAMIC_CACHE_REQUESTER_QUEUE_CONNECTION', 'default'),
+        'name' => env('STATAMIC_CACHE_REQUESTER_QUEUE_NAME', 'cacherequester')
+    ],
 
     /*
     |--------------------------------------------------------------------------

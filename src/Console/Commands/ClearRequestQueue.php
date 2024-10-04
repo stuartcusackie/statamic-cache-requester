@@ -28,8 +28,8 @@ class ClearRequestQueue extends Command
      */
     public function handle()
     {
-        $connection = config('queue.default');
-        $queue = config('statamic-cache-requester.queue_name');
+        $connection = config('statamic-cache-requester.queue.connection');
+        $queue = config('statamic-cache-requester.queue.name');
 
         try {
             Artisan::call("queue:clear {$connection} --queue={$queue} --force");
