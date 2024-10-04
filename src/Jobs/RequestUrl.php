@@ -57,7 +57,7 @@ class RequestUrl implements ShouldQueue
      */
     public function __construct(string $url, bool $processImages = false, string $requestType = 'get', array $postData = [])
     {
-        $this->onConnection(config('statamic-cache-requester.queue_connection'));
+        $this->onConnection(config('queue.default'));
         $this->onQueue(config('statamic-cache-requester.queue_name'));
 
         $this->url = $this->applyUrlManipulations($url);

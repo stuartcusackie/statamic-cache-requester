@@ -18,11 +18,10 @@ return [
     | Queue
     |--------------------------------------------------------------------------
     |
-    | Define your queue settings here. I recommend redis but any queue is fine.
+    | Define your queue settings here.
     |
     */
-    'queue_connection' => 'redis',
-    'queue_name' => 'cacherequester',
+    'queue_name' => env('STATAMIC_CACHE_REQUESTER_QUEUE_NAME', 'default'),
 
     /*
     |--------------------------------------------------------------------------

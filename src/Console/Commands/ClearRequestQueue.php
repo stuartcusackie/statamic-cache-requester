@@ -28,7 +28,7 @@ class ClearRequestQueue extends Command
      */
     public function handle()
     {
-        $connection = config('statamic-cache-requester.queue_connection');
+        $connection = config('queue.default');
         $queue = config('statamic-cache-requester.queue_name');
 
         try {

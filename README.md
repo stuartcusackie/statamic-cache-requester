@@ -28,13 +28,13 @@ Check the config file for special features such as queue configuration and light
 ```
 php artisan requester:entries
 ```
-This one basically does the same as `php please static:warm`. If you are using Static caching then **it's a good idea to add either one of these commands to your deploy script (e.g. Forge).** Deployments clear the static cache so this will rebuild it for all entries afterwards.
+If you are using Static caching then **it's a good idea to add this command to your deploy script (e.g. Forge).** Deployments clear the static cache so this will rebuild it for all entries afterwards.
 <br/><br/>
 
 ```
 php artisan requester:images
 ```
-This one queues up jobs to visit every entry url and scan them for image urls, which will also then be queued as jobs for visiting. This process prepares all of your images in advance, but it can take a long time to run. You will usually only run this command once on initial deployment of the site, or after any major restructuring of asset filenames and folders. I do **not** recommend adding this to your deployment script as images rarely change.
+You will usually only run this command once on initial deployment of the site, or after any major restructuring of asset filenames and folders. I do **not** recommend adding this to your deployment script as images rarely change.
 <br/><br/>
 
 ```
@@ -45,7 +45,7 @@ Clears the configured queue. Be careful if using the default queue or a shared q
 
 ## Queues
 
-This package utilises a Redis queue called **cacherequester**. You can configure the package to use whatever queue and connection that you prefer but it's probably best not to use a shared queue or the default queue.
+This package utilises the default queue connection and name. You can set up a separate queue name in the config.
 
 The queue can be ran manually with this command:
 
