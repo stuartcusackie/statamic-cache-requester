@@ -47,12 +47,6 @@ Clears the configured queue. Be careful if using the default queue or a shared q
 
 This package utilises the default queue connection and name. You can define a separate queue name using the STATAMIC_CACHE_REQUESTER_QUEUE_NAME env variable.
 
-The queue can be ran manually with this command:
-
-`php artisan queue:work redis --queue=cacherequester`
-
-I recommend using a Laravel Forge worker, or something similar, as workers are prone to exit prematurely when using the command line.
-
 ## Todo
 
 - Add terms to entry requests
