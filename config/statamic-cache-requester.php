@@ -7,11 +7,10 @@ return [
     | Events
     |--------------------------------------------------------------------------
     |
-    | By default, cache requester will scan and request all images for an entry
-    | when it is saved. You can toggle that behaviour here.
+    | Enable this to scan and request all images for an entry after each save.
     |
     */
-    'request_on_entry_save' => true,
+    'request_on_entry_save' => false,
 
     /*
     |--------------------------------------------------------------------------
