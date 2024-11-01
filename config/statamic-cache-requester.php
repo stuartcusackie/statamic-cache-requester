@@ -8,7 +8,8 @@ return [
     |--------------------------------------------------------------------------
     |
     | Enable this to scan and request all images for an entry after each save.
-    |
+    | This can cause the control panel to become sluggish on sites with
+    | a lot of imagery.
     */
     'request_on_entry_save' => false,
 
