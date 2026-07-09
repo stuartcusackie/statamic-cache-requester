@@ -12,8 +12,12 @@ This package can do a few things:
 
 ## Installation
 
+This package relies on an release candidate version of simplehtmldom, which will be rejected by the latest Laravel versions that require min-stability of dev.
+
+You can run both of these commands to install this package:
 ```
-composer require stuartcusackie/statamic-cache-requester --with-all-dependencies
+composer require simplehtmldom/simplehtmldom:"^2.0@RC"
+composer require stuartcusackie/statamic-cache-requester
 ```
 
 ```
