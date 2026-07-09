@@ -13,7 +13,7 @@ This package can do a few things:
 ## Installation
 
 ```
-composer require stuartcusackie/statamic-cache-requester
+composer require stuartcusackie/statamic-cache-requester --with-all-dependencies
 ```
 
 ```
